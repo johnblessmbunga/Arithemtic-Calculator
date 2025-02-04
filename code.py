@@ -2,6 +2,44 @@ import os
 
 
 #functions
+def plus_minus(symbol_array):
+    #simplflies series of + and - to either or
+    countpm = 0
+    countms = 0
+    for i in range(len(symbol_array) - 1, -1, -1):
+        #check if current instance is + or -
+        if symbol_array[i] == '+' or symbol_array[i] == '-':
+            countpm += 1
+            if symbol_array[i] == '-':
+                countms += 1
+        #deals with assigmnet
+        if countpm == 1 and symbol_array[i] not in ['+', '-']:
+            #only one in series
+            countpm = 0
+            countms = 0
+        elif countpm > 1:
+            #series detected
+            if i == 0 and symbol_array[0] in ['+', '-']:
+                #reached start
+                a = 0
+            elif symbol_array[i] not in ['+', '-']:
+                #series ended
+                a = 1
+            else:
+                a = -1
+            if a != -1:
+                for j in range(countpm + i - 1 + a, i + a, -1):
+                    #remove redundant symbols
+                    symbol_array.pop(j)
+                countpm = 0
+                if countms % 2 == 0:
+                    symbol_array[i + a] = '+'
+                else:
+                    symbol_array[i + a] = '-'
+                countms = 0
+    return symbol_array
+
+
 def transform_numbers(user_input):
     #users input will be changed form a string to list of
     #numbers and symbols
@@ -29,18 +67,18 @@ def transform_numbers(user_input):
             if 48 <= ord(symbols[i][j]) <= 57:
                 is_num = 1
             elif ord(symbols[i][j]) == 46:
-                is_num = 1
-                isfloat = 1
+                isfloat += 1
             else:
                 is_num = 0
                 break
         #add the transform number or string to output
         if is_num == 1 and isfloat == 1:
             output.append(float(symbols[i]))
-        elif is_num == 1:
+        elif is_num == 1 and isfloat == 0:
             output.append(int(symbols[i]))
         else:
             output.append(symbols[i])
+    output = plus_minus(output)
     return output
 
 
@@ -53,10 +91,16 @@ def one_operation(symbol_array, point, symbol):
     if point + 1 >= len(symbol_array):
         #if no further element
         out_of_bound = 1
-    elif symbol_array[point + 1] == '-':
-        #if second number is negative
-        symbol_array[point + 1] = -symbol_array[point + 2]
-        symbol_array.pop(point + 2)
+    elif symbol_array[point + 1] in ['-', '+']:
+        #if second number has sign
+        if point + 2 < len(symbol_array):
+            if symbol_array[point + 1] == '-':
+                if isinstance(symbol_array[point + 2], int) or isinstance(symbol_array[point + 2], float):
+                    symbol_array[point + 1] = -symbol_array[point + 2]
+            else:
+                symbol_array[point + 1] = symbol_array[point + 2]
+            symbol_array.pop(point + 2)
+
     if out_of_bound == 0:
         int2 = symbol_array[point + 1]
     answer = 0
@@ -77,7 +121,7 @@ def one_operation(symbol_array, point, symbol):
     elif symbol == '/':
         if int2 == 0:
             print('Divide by zero detected')
-            answer = float('inf')
+            answer = 'nan'
         else:
             answer = int1 / int2
     symbol_array[point] = answer
@@ -90,11 +134,14 @@ def one_operation(symbol_array, point, symbol):
 
 def one_line_operations(symbol_array):
     #performs operations from right to left while considering bimdas(not brackets)
-    # if first number is negative change first number to negative and remove sign
+    # if first number is negative or positive change first number attribute and remove sign
     if len(symbol_array) >= 2:
-        if symbol_array[0] == '-':
+        if symbol_array[0] in ['-', '+']:
             if isinstance(symbol_array[1], int) or isinstance(symbol_array[1], float):
-                symbol_array[0] = -symbol_array[1]
+                if symbol_array[0] == '-':
+                    symbol_array[0] = -symbol_array[1]
+                else:
+                    symbol_array[0] = symbol_array[1]
                 symbol_array.pop(1)
     #mutiplication and division done first
     n1 = symbol_array.count('*')
@@ -105,9 +152,9 @@ def one_line_operations(symbol_array):
         p1 = float('inf')
         p2 = float('inf')
         #check if any multiplication or division left and and their location
-        if n1 > 0:
+        if '*' in symbol_array:
             p1 = symbol_array.index('*')
-        if n2 > 0:
+        if '/' in symbol_array:
             p2 = symbol_array.index('/')
         #perform operation closer to right side
         if p1 < p2:
@@ -125,9 +172,9 @@ def one_line_operations(symbol_array):
         p1 = float('inf')
         p2 = float('inf')
         #check if any addition or subtraction left and their location
-        if n1 > 0:
+        if '+' in symbol_array:
             p1 = symbol_array.index('+')
-        if n2 > 0:
+        if '-' in symbol_array:
             p2 = symbol_array.index('-')
         #perform operation closer to right side
         if p1 < p2:
@@ -172,7 +219,7 @@ def bimdas(symbol_array):
                     symbol_array[front_brace] = answer[0]
             else:
                 #no closed bracket
-                print('Unclosed bracket detected')
+                print('Bracket Error Detected')
         #all brackets removed
         symbol_array = one_line_operations(symbol_array)
     return symbol_array
@@ -189,16 +236,16 @@ input_equation = input('Input equation:')
 #transform user input
 os.system('cls')
 equation = transform_numbers(input_equation)
-equation_display=''
+equation_display = ''
 for z in equation:
-    equation_display=equation_display+str(z)
+    equation_display = equation_display + str(z)
 #perform operation
 final_answer = bimdas(equation)
 #print answer or error
 if len(final_answer) == 1:
     if isinstance(final_answer[0], int) or isinstance(final_answer[0], float):
         #computed number
-        print(equation_display,' = ',final_answer[0])
+        print(equation_display, ' = ', final_answer[0])
 
     else:
         #some error occurred
