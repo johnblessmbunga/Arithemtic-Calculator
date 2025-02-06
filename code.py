@@ -227,7 +227,7 @@ def bimdas(symbol_array):
 
 #code
 #instructions
-os.system('cls5')
+os.system('cls')
 print('Calculator that performs the following operations:',
       '\naddition subtraction, multiplication and division.',
       '\nUse the following symbols: +-/*x()')
