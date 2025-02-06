@@ -60,22 +60,15 @@ def transform_numbers(user_input):
     symbols = list(filter(None, symbols))
     output = []
     #change number strings to intergers or floats
-    for i in range(len(symbols)):
-        is_num = 0
-        isfloat = 0
-        for j in range(len(symbols[i])):
-            if 48 <= ord(symbols[i][j]) <= 57:
-                is_num = 1
-            elif ord(symbols[i][j]) == 46:
-                isfloat += 1
-            else:
-                is_num = 0
-                break
+       for i in range(len(symbols)):
+        is_float = 1
+        try:
+            float(symbols[i])
+        except ValueError:
+            is_float=0
         #add the transform number or string to output
-        if is_num == 1 and isfloat == 1:
+        if is_float == 1:
             output.append(float(symbols[i]))
-        elif is_num == 1 and isfloat == 0:
-            output.append(int(symbols[i]))
         else:
             output.append(symbols[i])
     output = plus_minus(output)
