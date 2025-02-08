@@ -88,7 +88,7 @@ def one_operation(symbol_array, point, symbol):
         #if second number has sign
         if point + 2 < len(symbol_array):
             if symbol_array[point + 1] == '-':
-                if isinstance(symbol_array[point + 2], int) or isinstance(symbol_array[point + 2], float):
+                if isinstance(symbol_array[point + 2], float):
                     symbol_array[point + 1] = -symbol_array[point + 2]
             else:
                 symbol_array[point + 1] = symbol_array[point + 2]
@@ -130,7 +130,7 @@ def one_line_operations(symbol_array):
     # if first number is negative or positive change first number attribute and remove sign
     if len(symbol_array) >= 2:
         if symbol_array[0] in ['-', '+']:
-            if isinstance(symbol_array[1], int) or isinstance(symbol_array[1], float):
+            if isinstance(symbol_array[1], float):
                 if symbol_array[0] == '-':
                     symbol_array[0] = -symbol_array[1]
                 else:
@@ -236,7 +236,7 @@ for z in equation:
 final_answer = bimdas(equation)
 #print answer or error
 if len(final_answer) == 1:
-    if isinstance(final_answer[0], int) or isinstance(final_answer[0], float):
+    if isinstance(final_answer[0], float):
         #computed number
         print(equation_display, ' = ', final_answer[0])
 
