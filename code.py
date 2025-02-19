@@ -210,6 +210,11 @@ def bimdas(symbol_array):
                 if len(answer) >= 1:
                     #put answer as long as not empty
                     symbol_array[front_brace] = answer[0]
+                    if front_brace > 0:
+                        #number in front of bracket expected multiply
+                        if isinstance(symbol_array[front_brace - 1],float) and isinstance(symbol_array[front_brace],float):
+                            symbol_array[front_brace - 1] = symbol_array[front_brace - 1] * symbol_array[front_brace]
+                            symbol_array.pop(front_brace)
             else:
                 #no closed bracket
                 print('Bracket Error Detected')
