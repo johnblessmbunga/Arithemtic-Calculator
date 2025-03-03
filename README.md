@@ -16,11 +16,32 @@ To strat application ,run:
 
 npm start
 ### Features
-__-Basic Arithmetic Operations__: Input an equation to with any combination of the follwoing operations; addition, subtraction, multiplication or division using user input.To represent these operations the follwoing symbols can be used +,-,*,x,/. 
+__-Basic Arithmetic Operations__: The calculator can solve equations involving any combination of the following operations: addition, subtraction, multiplication, or division.
 
-__-Brackets__: Can use brackets in equations with symbols \(\) other brackets such as \[\] and \{\} are not accepted. When two adjacent bracket elements or a number element follwed by a bracket element the result of the commputation is the product of the two elements.
+The following symbols can be used to represent these operations:
 
-__-Positive & Negative Handling__: Recognises + or - before a number or bracket element as  an indication of a positive or negative element. Additionaly Arithemtic-Calculator can simplify multiple adjacent + or/and - signs into a single + or - sign.
+Addition: +
+
+Subtraction: -
+
+Multiplication: * or x
+
+Division: /
+
+__-Brackets__: 
+   -The calculator supports the use of parentheses () for grouping operations.
+
+   -Other bracket types such as [] and {} are not accepted.
+
+   -When two adjacent bracket elements or a number followed by a bracket element are present,       the calculator interprets the computation as the product of the two elements.
+
+__-Positive & Negative Handling__: 
+   -The calculator recognizes + or - before a number or bracket element as an indication of a       positive or negative element.
+
+   -It can simplify multiple adjacent + or - signs into a single + or - sign.
+   Example:
+   5 + -3 is simplified to 5 - 3.
+   5 -- 3 is simplified to 5 + 3.
 
 __-Space & Error Handling__: Is capable of handling whether spaces are included, not included, or a combination of both. Arithemtic-Calculator also produces error message if unclosed bracket, random string, invalid operation detected.
 ## License
