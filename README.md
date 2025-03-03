@@ -29,16 +29,18 @@ Multiplication: * or x
 Division: /
 
 __-Brackets__: 
-   -The calculator supports the use of parentheses () for grouping operations.
+   
+   The calculator supports the use of parentheses () for grouping operations.
 
-   -Other bracket types such as [] and {} are not accepted.
+   Other bracket types such as [] and {} are not accepted.
 
-   -When two adjacent bracket elements or a number followed by a bracket element are present,       the calculator interprets the computation as the product of the two elements.
+   When two adjacent bracket elements or a number followed by a bracket element are present,       the calculator interprets the computation as the product of the two elements.
 
 __-Positive & Negative Handling__: 
-   -The calculator recognizes + or - before a number or bracket element as an indication of a       positive or negative element.
+  
+   The calculator recognizes + or - before a number or bracket element as an indication of a       positive or negative element.
 
-   -It can simplify multiple adjacent + or - signs into a single + or - sign.
+   It can simplify multiple adjacent + or - signs into a single + or - sign.
    Example:
    5 + -3 is simplified to 5 - 3.
    5 -- 3 is simplified to 5 + 3.
