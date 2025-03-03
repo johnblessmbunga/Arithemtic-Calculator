@@ -5,4 +5,15 @@ Arithemtic-Calculator is a calculator that performs the following operations: ad
 2. [Usage](#usage)
 3. [Contributing](#contributing)
 4. [License](#license)
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/johnblessmbunga/Arithemtic-Calculator.git
+   cd Arithemtic-Calculator
+   npm install
+###  Usage
+To strat application ,run:
+npm start
+### Features
 
