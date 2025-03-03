@@ -41,8 +41,11 @@ __-Positive & Negative Handling__:
    The calculator recognizes + or - before a number or bracket element as an indication of a       positive or negative element.
 
    It can simplify multiple adjacent + or - signs into a single + or - sign.
+   
    Example:
+   
    5 + -3 is simplified to 5 - 3.
+   
    5 -- 3 is simplified to 5 + 3.
 
 __-Space & Error Handling__: Is capable of handling whether spaces are included, not included, or a combination of both. Arithemtic-Calculator also produces error message if unclosed bracket, random string, invalid operation detected.
